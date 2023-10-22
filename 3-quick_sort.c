@@ -8,44 +8,44 @@
 */
 void quick_sort(int *array, size_t size)
 {
-    size_t hold = 0, iterate = 0, pivot = size - 1, index;
-    int temp;
-    bool check = false, swap = false;
+	size_t hold = 0, iterate = 0, pivot = size - 1, index;
+	int temp;
+	bool check = false, swap = false;
 
-    pivot = size - 1;
+	pivot = size - 1;
 
-    for (index = 0; index < size && pivot > 0; index++)
-    {
-        swap = false;
-        check = false;
-        for (iterate = 0; iterate < pivot; iterate++)
-        {
-            if (array[iterate] > array[pivot])
-            {
-                if (check == false)
-                {
-                    hold = iterate;
-                    check = true;
-                }
-            }
-            if (array[iterate] < array[pivot] && check)
-            {
-                temp = array[hold];
-                array[hold] = array[iterate];
-                array[iterate] = temp;
-                hold = iterate;
-                print_array(array, size);
-            }
-            if (iterate == pivot - 1 && check)
-            {
-                temp = array[pivot];
-                array[pivot] = array[hold];
-                array[hold] = temp;
-                swap = true;
-                print_array(array, size);
-            }
-        }
-        if (swap == false)
-            pivot--;
-    }
+	for (index = 0; index < size && pivot > 0; index++)
+	{
+		swap = false;
+		check = false;
+		for (iterate = 0; iterate < pivot; iterate++)
+		{
+			if (array[iterate] > array[pivot])
+			{
+				if (check == false)
+				{
+					hold = iterate;
+					check = true;
+				}
+			}
+			if (array[iterate] < array[pivot] && check)
+			{
+				temp = array[hold];
+				array[hold] = array[iterate];
+				array[iterate] = temp;
+				hold = iterate;
+				print_array(array, size);
+			}
+			if (iterate == pivot - 1 && check)
+			{
+				temp = array[pivot];
+				array[pivot] = array[hold];
+				array[hold] = temp;
+				swap = true;
+				print_array(array, size);
+			}
+		}
+		if (swap == false)
+			pivot--;
+	}
 }
