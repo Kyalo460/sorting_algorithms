@@ -13,10 +13,10 @@ void insertion_sort_list(listint_t **list)
 		return;
 
 	while (current != NULL)
-    {
+	{
 		if (current->next == NULL)
 			break;
-        if (current->n > current->next->n)
+		if (current->n > current->next->n)
 		{
 			insert = current->next;
 			current->next = insert->next;
@@ -70,5 +70,5 @@ void insert_smallest(listint_t **list, listint_t *previous, listint_t *insert)
 			continue;
 		}
 		break;
-        }
+	}
 }
