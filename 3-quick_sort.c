@@ -14,7 +14,6 @@ void quick_sort(int *array, size_t size)
 
 	if (size < 2)
 		return;
-	pivot = size - 1;
 
 	for (index = 0; index < size && pivot > 0; index++)
 	{
