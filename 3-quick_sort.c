@@ -1,6 +1,6 @@
 #include "sort.h"
-#include "stdio.h"
-#include "stdbool.h"
+#include <stdio.h>
+#include <stdbool.h>
 /**
  * quick_sort - a quick sort algorithm that sorts integers in ascending order
  * @array: the integert array to sort
@@ -15,7 +15,7 @@ void quick_sort(int *array, size_t size)
 	if (size < 2)
 		return;
 
-	for (index = 0; index < size && pivot > 0; index++)
+	for (index = 0; pivot > 0; index++)
 	{
 		check = false;
 		for (iterate = 0; iterate < pivot; iterate++)
