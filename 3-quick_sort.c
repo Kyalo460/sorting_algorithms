@@ -10,13 +10,14 @@ void quick_sort(int *array, size_t size)
 {
 	size_t hold = 0, iterate = 0, pivot = size - 1, index;
 	int temp;
-	bool check = false, swap = false;
+	bool check = false;
 
+	if (size < 2)
+		return;
 	pivot = size - 1;
 
 	for (index = 0; index < size && pivot > 0; index++)
 	{
-		swap = false;
 		check = false;
 		for (iterate = 0; iterate < pivot; iterate++)
 		{
@@ -33,7 +34,8 @@ void quick_sort(int *array, size_t size)
 				temp = array[hold];
 				array[hold] = array[iterate];
 				array[iterate] = temp;
-				hold = iterate;
+				iterate = hold;
+				check = false;
 				print_array(array, size);
 			}
 			if (iterate == pivot - 1 && check)
@@ -41,11 +43,10 @@ void quick_sort(int *array, size_t size)
 				temp = array[pivot];
 				array[pivot] = array[hold];
 				array[hold] = temp;
-				swap = true;
 				print_array(array, size);
 			}
 		}
-		if (swap == false)
+		if (check == false)
 			pivot--;
 	}
 }
