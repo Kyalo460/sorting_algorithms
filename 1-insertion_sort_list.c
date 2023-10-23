@@ -9,18 +9,14 @@
 void insert_node(listint_t **list, listint_t **swap, listint_t *insert)
 {
 	(*swap)->next = insert->next;
-
 	if (insert->next != NULL)
 		insert->next->prev = *swap;
-
 	insert->prev = (*swap)->prev;
 	insert->next = *swap;
-
 	if ((*swap)->prev != NULL)
 		(*swap)->prev->next = insert;
 	else
 		*list = insert;
-
 	(*swap)->prev = insert;
 	*swap = insert->prev;
 }
@@ -40,7 +36,6 @@ void insertion_sort_list(listint_t **list)
 	{
 		temp = current->next;
 		insert = current->prev;
-
 		while (insert != NULL && current->n < insert->n)
 		{
 			insert_node(list, &insert, current);
