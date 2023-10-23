@@ -1,8 +1,5 @@
 #include "sort.h"
-#include <stdio.h>
 #include <stdbool.h>
-
-void insert_smallest(listint_t **list, listint_t *previous, listint_t *insert);
 
 /**
  * insertion_sort_list - sorts a list using insertion algorithm
