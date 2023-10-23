@@ -1,73 +1,50 @@
 #include "sort.h"
 
 /**
- * insertion_sort_list - sorts a list using insertion algorithm
- * @list: a double pointer to the head of the doubly linked list
-*/
-void insertion_sort_list(listint_t **list)
+ * insert_node - inserts the node by swapping places.
+ * @list: a double pointer to the head of list.
+ * @swap: a double pointer to node to swap.
+ * @insert: a pointer to node to insert.
+ */
+void insert_node(listint_t **list, listint_t **swap, listint_t *insert)
 {
-	listint_t *current = *list,  *insert, *previous;
+	(*swap)->next = insert->next;
 
-	if (current == NULL || current->next == NULL)
-		return;
+	if (insert->next != NULL)
+		insert->next->prev = *swap;
 
-	while (current != NULL)
-	{
-		if (current->next == NULL)
-			break;
-		if (current->n > current->next->n)
-		{
-			insert = current->next;
-			current->next = insert->next;
-			if (insert->next)
-				insert->next->prev = current;
+	insert->prev = (*swap)->prev;
+	insert->next = *swap;
 
-			insert->prev = current->prev;
-			current->prev = insert;
-			insert->next = current;
-			if (insert->prev)
-				insert->prev->next = insert;
-			else
-				(*list) = insert;
-			print_list(*list);
+	if ((*swap)->prev != NULL)
+		(*swap)->prev->next = insert;
+	else
+		*list = insert;
 
-			previous = insert->prev;
-
-			insert_smallest(list, previous, insert);
-		}
-		else
-			current = current->next;
-	}
+	(*swap)->prev = insert;
+	*swap = insert->prev;
 }
 
 /**
- * insert_smallest - finds the correct position to insert
- * @list: double pointer to the original list
- * @previous: the previous node before the node to insert
- * @insert: node to insert to correct position
-*/
-void insert_smallest(listint_t **list, listint_t *previous, listint_t *insert)
+ * insertion_sort_list - sorts a linked list using insertion sort
+ * @list: a double pointer to the head of linked list
+ */
+void insertion_sort_list(listint_t **list)
 {
-	listint_t *temp;
+	listint_t *current, *insert, *temp;
 
-	while (previous)
+	if (list == NULL || *list == NULL || (*list)->next == NULL)
+		return;
+
+	for (current = (*list)->next; current != NULL; current = temp)
 	{
-		if (insert->n < previous->n)
+		temp = current->next;
+		insert = current->prev;
+
+		while (insert != NULL && current->n < insert->n)
 		{
-			temp = insert->next;
-			temp->prev = previous;
-			insert->next = previous;
-			insert->prev = previous->prev;
-			if (previous->prev)
-				previous->prev->next = insert;
-			else
-				(*list) = insert;
-			previous->next = temp;
-			previous->prev = insert;
-			previous = insert->prev;
-			print_list(*list);
-			continue;
+			insert_node(list, &insert, current);
+			print_list((const listint_t *)*list);
 		}
-		break;
 	}
 }
